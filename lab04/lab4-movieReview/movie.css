@@ -1,0 +1,128 @@
+body{
+	background-image: url("background.png");
+	font-size: 8pt;
+	font-family: "Verdana", "Tahoma", sans-serif;
+	margin: 0;
+	padding: 0;
+}
+
+#Banner{
+	text-align: center;
+	background-image: url("bannerbg.png");
+	background-repeat: repeat-x;
+	height: 50px;
+}
+
+h1{
+	text-align: center;
+	font-size: 24pt;
+	font-weight: bold;
+	font-family: "Tahoma", "Verdana", sans-serif;
+	text-shadow: 3px 3px #999999;
+}
+
+main{
+	width: 800px;
+	margin: auto;
+	border: 4px solid gray;
+	border-radius: 20px;
+	overflow: hidden;
+}
+
+article{
+	width: 550px;
+}
+
+#Rotten33{
+	background-image: url("rbg.png");
+	background-repeat: repeat-x;
+	height: 83px;
+	font-size: 48pt;
+	font-weight: bold;
+	color: red;
+}
+
+#Rotten33 img{
+	vertical-align: bottom;
+}
+
+.ReviewLeft, .ReviewRight{
+	width: 47%;
+	overflow: hidden;
+}
+
+.ReviewLeft{
+	float: left;
+	margin-left: 2%;
+	margin-right: 2%;
+}
+
+.ReviewBox{
+	font-size: 8pt;
+	font-weight: bold;
+	background-color: #E8DC9B;
+	border: 2px solid gray;
+	border-radius: 10px;
+	overflow: hidden;
+	padding: 8px;
+}
+
+.ReviewBox img{
+	margin-right: 5px;
+	float: left;
+}
+
+.Reviewer{
+	margin-bottom: 20pt;
+	overflow: hidden;
+}
+
+.Reviewer img{
+	float: left;
+	margin-right: 5px;
+}
+
+.Reviewer span{
+	font-style: italic;
+}
+
+aside{
+	width: 250px;
+	background-color: #A2B964;
+	float: right;
+}
+
+aside dl{
+	margin: 10pt;
+	font-size: 8pt;
+	font-family: Arial, sans-serif;
+}
+
+dt{
+	font-weight: bold;
+}
+
+dd{
+	margin-bottom: 10pt;
+}
+
+ul{
+	list-style: none;
+	padding-left: 0;
+	margin: 0;
+}
+
+#Bottom{
+	text-align: center;
+	background-color: #A2B964;
+	padding: 5px;
+	margin: 0;
+	clear: both;
+}
+
+footer{
+	position: fixed;
+	opacity: 0.5;
+	right: 0;
+	bottom: 0;
+}

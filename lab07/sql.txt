@@ -1,0 +1,141 @@
+Ex 1: Create DB and tables
+
+create table student (
+student_id integer primary key not null,
+name varchar(10) not null,
+year tinyint not null default 1,
+dept_no integer not null,
+major varchar(20)
+);
+
+create table department (
+dept_no integer primary key not null auto_increment,
+dept_name varchar(20) not null unique,
+office varchar(20) not null,
+office_tel varchar(13)
+);
+
+alter table `student` change `major` `major` varchar(30);
+alter table student add gender varchar(10);
+alter table student drop column gender;
+
+Ex 2: Insert data
+
+INSERT INTO student VALUES (20070002, 'Jane Smith', 3, 4, 'Business Administration');
+INSERT INTO student VALUES (20060001, 'Ashley Jackson', 4, 4, 'Business Administration');
+INSERT INTO student VALUES (20030001, 'Liam Johnson', 4, 2, 'Electrical Engineering');
+INSERT INTO student VALUES (20040003, 'Jacob Lee', 3, 2, 'Electrical Engineering');
+INSERT INTO student VALUES (20060002, 'Noah Kim', 3, 1, 'Computer Science');
+INSERT INTO student VALUES (20100002, 'Ava Lim', 3, 4, 'Business Administration');
+INSERT INTO student VALUES (20110001, 'Emma Watson', 2, 1, 'Computer Science');
+INSERT INTO student VALUES (20080003, 'Lisa Maria', 4, 3, 'Law');
+INSERT INTO student VALUES (20040002, 'Jacob William', 4, 5, 'Law');
+INSERT INTO student VALUES (20070001, 'Emily Rose', 4, 4, 'Business Administration');
+INSERT INTO student VALUES (20100001, 'Ethan Hunt', 3, 4, 'Business Administration');
+INSERT INTO student VALUES (20110002, 'Jason Mraz' 2, 1, 'Electrical Engineering');
+INSERT INTO student VALUES (20030002, 'John Smith', 5, 1, 'Computer Science');
+INSERT INTO student VALUES (20070003, 'Sophia Park', 4, 3, 'Law');
+INSERT INTO student VALUES (20070007, 'James Michael', 2, 4, 'Business Administration');
+INSERT INTO student VALUES (20100003, 'James Bond', 3, 1, 'Computer Science');
+INSERT INTO student VALUES (20070005, 'Olivia Madison', 2, 5, 'English Language and Literature');
+
+INSERT INTO department (dept_name, office, office_tel) VALUES ('Computer Science', 'Science Building 101', '02-3290-0123'), ('Electrical Engineering', 'Engineering Building 401', '02-3290-2345'), ('Law', 'Law Building 201', '02-3290-7896'), ( 'Business Administration', 'Business Building 104', '02-3290-1112'), ('English Language and Literature', 'Language Building 303', '02-3290-4412');
+
+Ex 3: Update & delete data
+
+1)
+update student SET major='Electrical and Electronics Engineering' WHERE major='Electrical Engineering';
+update department SET dept_name='Electrical and Electronics Engineering' WHERE dept_name='Electrical Engineering';
+2)
+INSERT into department (dept_name, office, office_tel) values ('Special Education', 'Education Building 403', '02-3290-2347');
+3)
+update student SET major='Special Education', dept_no=6 WHERE name='Emma Watson';
+4)
+delete from student where name='Jason Mraz';
+5)
+delete from student where name='John Smith';
+
+Ex 4: Query data
+
+1)
+select * from student where major='Computer Science';
+2)
+select student_id, year, major from student;
+3)
+select * from student where year = 3;
+4)
+select * from student where year <= 2;
+5)
+select * from student where dept_no = (select dept_no from department where dept_name='Business Administration');
+
+Ex 5: Advanced query
+
+1)
+select * from student where student_id like "%2007%";
+2)
+select * from student order by student_id;
+3)
+select major
+from student
+group by major
+having avg(year) > 3;
+4)
+select * from student where student_id like "2007%" and major='Business Administration' limit 2;
+
+Ex 6: Multi-table query - imdb DB
+
+1)
+select role from movies m join roles r on m.id=r.movie_id where name='Pi';
+2)
+select first_name, last_name from actors a join (movies m join roles on id=movie_id) on actor_id=a.id where m.name='Pi';
+3)
+select first_name, last_name
+from actors a join (movies m join roles on id=movie_id) on actor_id=a.id
+where m.name='Kill Bill: Vol. 1'
+and (first_name, last_name) in
+(select first_name, last_name from actors a join (movies m join roles on id=movie_id) on actor_id=a.id where m.name='Kill Bill: Vol. 2');
+4)
+select first_name, last_name, count(movie_id)
+from actors join roles on id=actor_id
+group by actor_id
+order by count(actor_id) desc
+limit 7;
+5)
+select genre
+from movies_genres
+group by genre
+order by count(genre) desc
+limit 3;
+6)
+select first_name, last_name, genre, count(director_id)
+from directors
+join movies_directors md on id=director_id
+join movies_genres mg on md.movie_id=mg.movie_id
+where genre='Thriller'
+group by director_id
+order by count(director_id) desc
+limit 1;
+
+Ex 7: Multi-table  query - simpsons DB
+
+1)
+select grade
+from grades join courses on course_id = id
+where name = 'Computer Science 143';
+2)
+select s.name, grade
+from students s join grades on s.id=student_id
+join courses c on c.id = course_id
+where c.name = 'Computer Science 143'
+and grade <= 'B-';
+3)
+select s.name, c.name, grade
+from students s join grades on s.id=student_id
+join courses c on c.id= course_id
+where grade <= 'B-';
+4)
+select name
+from courses
+join grades on id=course_id
+group by course_id
+having count(student_id) >= 2;
